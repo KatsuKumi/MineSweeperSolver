@@ -12,7 +12,7 @@
         @change="handleImageUpload" 
         class="file-input"
       />
-      <button @click="$refs.fileInput.click()" class="btn btn-primary">
+      <button @click="fileInput?.click()" class="btn btn-primary">
         Upload Image
       </button>
       <button 
@@ -60,8 +60,10 @@
 import { ref, nextTick } from 'vue'
 import { useImageAnalysis } from '@/composables/useImageAnalysis'
 import { useGameStore } from '@/stores/gameStore'
+import { useColorStore } from '@/stores/colorStore'
 
 const gameStore = useGameStore()
+const colorStore = useColorStore()
 const { analyzeImageWithGrid } = useImageAnalysis()
 
 const fileInput = ref<HTMLInputElement>()
@@ -170,7 +172,7 @@ function showColorDebug() {
     return
   }
   
-  const colorStore = gameStore.colorStore || {}
+  const colorSettings = colorStore.settings
   let debugHtml = '<strong>Color Debug - First 20 cells:</strong><br><div style="font-family: monospace; font-size: 12px; max-height: 300px; overflow-y: auto;">'
   
   let cellCount = 0

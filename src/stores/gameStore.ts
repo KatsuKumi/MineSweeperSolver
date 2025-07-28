@@ -115,7 +115,7 @@ export const useGameStore = defineStore('game', () => {
         if (value === 'M') mines++
         else if (value === 'F') flags++
         else if (value === '0') empty++
-        else if (!isNaN(Number(value)) && value !== '' && value !== '0') numbers++
+        else if (['1', '2', '3', '4', '5', '6', '7', '8'].includes(value)) numbers++
         else if (value === '') unrevealed++
       }
     }
