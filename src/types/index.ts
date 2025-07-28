@@ -22,10 +22,8 @@ export type {
   ColorDetectionResult,
   ColorDebugInfo,
   ColorTolerance,
-  GTNHColorPreset,
   ColorKey,
   CellColorType,
-  GTNHPresetName,
 } from './colors'
 
 // Analysis types
