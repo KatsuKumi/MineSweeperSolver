@@ -1,0 +1,144 @@
+/* ===== Layout Styles ===== */
+.app {
+  min-height: 100vh;
+  background: #0a1929;
+  color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.app-header {
+  text-align: center;
+  padding: 10px;
+  background: #1a2332;
+  border: 2px solid #bb86fc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.app-header h1 {
+  margin: 0 0 5px 0;
+  color: #bb86fc;
+  font-size: 1.5rem;
+}
+
+.app-header p {
+  margin: 0;
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.app .game-container {
+  display: grid;
+  grid-template-columns: 350px 1fr 350px;
+  gap: 15px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app .controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.app .game-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.app .right-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+  .app .game-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+  }
+  
+  .app .controls-panel {
+    order: 2;
+  }
+  
+  .app .game-panel {
+    order: 1;
+  }
+  
+  .app .right-controls-panel {
+    order: 3;
+  }
+
+  .color-settings .color-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .color-settings .section-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .app-header p {
+    font-size: 0.8rem;
+  }
+  
+  .app .game-container {
+    padding: 0 5px;
+    gap: 8px;
+  }
+  
+  .app {
+    padding: 5px;
+  }
+
+  .game-controls {
+    padding: 15px;
+  }
+  
+  .game-controls .grid-inputs, 
+  .game-controls .preset-buttons, 
+  .game-controls .action-buttons {
+    justify-content: center;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .image-analysis .upload-section {
+    justify-content: center;
+  }
+  
+  .image-analysis .result-actions {
+    justify-content: center;
+  }
+
+  .game-info {
+    padding: 15px;
+  }
+  
+  .game-info .info-content {
+    font-size: 14px;
+  }
+
+  .color-settings .color-actions {
+    gap: 8px;
+  }
+}
