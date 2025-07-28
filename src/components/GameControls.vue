@@ -76,22 +76,22 @@
           <div class="card-content" v-show="activeCard === 'gtnh'">
             <div class="preset-option" @click.stop="setPreset(13, 13, 20)">
               <span class="option-icon">💎</span>
-              <span class="option-text">Small</span>
+              <span class="option-text">Tier 1</span>
               <span class="option-details">13×13 • 20 mines</span>
             </div>
             <div class="preset-option" @click.stop="setPreset(15, 15, 30)">
               <span class="option-icon">🔥</span>
-              <span class="option-text">Medium</span>
+              <span class="option-text">Tier 2</span>
               <span class="option-details">15×15 • 30 mines</span>
             </div>
             <div class="preset-option" @click.stop="setPreset(17, 17, 42)">
               <span class="option-icon">⚔️</span>
-              <span class="option-text">Large</span>
+              <span class="option-text">Tier 3</span>
               <span class="option-details">17×17 • 42 mines</span>
             </div>
             <div class="preset-option" @click.stop="setPreset(19, 19, 68)">
               <span class="option-icon">💀</span>
-              <span class="option-text">Extreme</span>
+              <span class="option-text">Tier 4</span>
               <span class="option-details">19×19 • 68 mines</span>
             </div>
           </div>
