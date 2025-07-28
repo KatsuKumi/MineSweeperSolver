@@ -1,32 +1,42 @@
 /* ===== Layout Styles ===== */
 .app {
   min-height: 100vh;
-  background: #0a1929;
-  color: #fff;
-  padding: 10px;
+  color: var(--text-primary);
+  padding: var(--space-md);
   box-sizing: border-box;
 }
 
 .app-header {
   text-align: center;
-  padding: 10px;
-  background: #1a2332;
-  border: 2px solid #bb86fc;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  padding: var(--space-xl);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
 }
 
+/* Removed decorative pseudo-element for performance */
+
 .app-header h1 {
-  margin: 0 0 5px 0;
-  color: #bb86fc;
-  font-size: 1.5rem;
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--text-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  background: linear-gradient(135deg, var(--text-primary), var(--primary-purple-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.025em;
 }
 
 .app-header p {
   margin: 0;
-  color: #ccc;
-  font-size: 0.9rem;
-  line-height: 1.3;
+  color: var(--text-muted);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
 }
 
 .app .game-container {
@@ -63,7 +73,8 @@
   .app .game-container {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    gap: 10px;
+    gap: var(--space-lg);
+    max-width: 800px;
   }
   
   .app .controls-panel {
@@ -84,61 +95,147 @@
   
   .color-settings .section-header {
     flex-direction: column;
-    gap: 10px;
+    gap: var(--space-md);
     align-items: stretch;
+  }
+
+  .app-header {
+    padding: var(--space-lg);
+  }
+
+  .app-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .grid {
+    padding: var(--space-md);
+  }
+
+  .cell {
+    width: 38px;
+    height: 38px;
+    font-size: var(--font-size-sm);
   }
 }
 
 @media (max-width: 768px) {
+  .app {
+    padding: var(--space-sm);
+  }
+
+  .app-header {
+    padding: var(--space-lg);
+  }
+
   .app-header h1 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-xl);
   }
   
   .app-header p {
-    font-size: 0.8rem;
+    font-size: var(--font-size-sm);
   }
   
   .app .game-container {
-    padding: 0 5px;
-    gap: 8px;
-  }
-  
-  .app {
-    padding: 5px;
+    gap: var(--space-md);
+    max-width: 100%;
   }
 
-  .game-controls {
-    padding: 15px;
+  .game-controls,
+  .color-settings,
+  .image-analysis,
+  .game-info,
+  .legend {
+    padding: var(--space-lg);
   }
   
   .game-controls .grid-inputs, 
   .game-controls .preset-buttons, 
   .game-controls .action-buttons {
     justify-content: center;
+    gap: var(--space-sm);
   }
   
   .btn {
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .grid {
+    padding: var(--space-sm);
+    gap: 2px;
+  }
+
+  .cell {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-xs);
   }
 
   .image-analysis .upload-section {
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
   }
   
   .image-analysis .result-actions {
     justify-content: center;
+    gap: var(--space-sm);
   }
 
   .game-info {
-    padding: 15px;
+    min-height: 100px;
   }
   
   .game-info .info-content {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
+  }
+
+  .color-settings .color-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
 
   .color-settings .color-actions {
-    gap: 8px;
+    gap: var(--space-sm);
+    flex-direction: column;
+  }
+
+  .legend-grid {
+    gap: var(--space-md);
+  }
+
+  .legend-item {
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: var(--space-xs);
+  }
+
+  .app-header {
+    padding: var(--space-md);
+  }
+
+  .app-header h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .cell {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+
+  .btn {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.75rem;
+  }
+
+  .game-controls .grid-inputs {
+    flex-direction: column;
+    align-items: center;
   }
 }
