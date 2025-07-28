@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import GameControls from './components/GameControls.vue'
+import ActionButtons from './components/ActionButtons.vue'
 import ColorSettings from './components/ColorSettings.vue'
 import ImageAnalysis from './components/ImageAnalysis.vue'
 import GameInfo from './components/GameInfo.vue'
@@ -28,6 +29,7 @@ function updateInfo(message: string) {
         </div>
         
         <div class="game-panel">
+          <ActionButtons @info-update="updateInfo" />
           <MinesweeperGrid />
           <GameInfo :info-message="infoMessage" />
         </div>
