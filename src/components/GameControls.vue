@@ -99,23 +99,6 @@
       </div>
     </div>
 
-    <div class="controls-section">
-      <h3>Actions</h3>
-      <div class="action-buttons">
-        <button @click="resetBoard" class="btn btn-warning">
-          Reset Board
-        </button>
-        <button @click="gameStore.solveMoves()" class="btn btn-success">
-          Solve Moves
-        </button>
-        <button @click="gameStore.clearHighlights()" class="btn btn-secondary">
-          Clear Highlights
-        </button>
-        <button @click="showBoardState" class="btn btn-info">
-          Show Stats
-        </button>
-      </div>
-    </div>
   </div>
 </template>
 

@@ -10,14 +10,26 @@
   text-align: center;
   padding: var(--space-xl);
   background: var(--bg-secondary);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-xl);
   margin-bottom: var(--space-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   position: relative;
+  overflow: hidden;
 }
 
-/* Removed decorative pseudo-element for performance */
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--primary-purple-light) 50%, 
+    transparent 100%);
+}
 
 .app-header h1 {
   margin: 0 0 var(--space-sm) 0;
@@ -59,7 +71,7 @@
 .app .game-panel {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--space-sm);
 }
 
 .app .right-controls-panel {
@@ -148,11 +160,13 @@
     padding: var(--space-lg);
   }
   
-  .game-controls .grid-inputs, 
-  .game-controls .preset-buttons, 
-  .game-controls .action-buttons {
-    justify-content: center;
-    gap: var(--space-sm);
+  .game-controls .grid-inputs {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .game-controls .grid-inputs .input-group:last-child {
+    grid-column: 1 / -1;
   }
   
   .btn {
@@ -183,9 +197,6 @@
     gap: var(--space-sm);
   }
 
-  .game-info {
-    min-height: 100px;
-  }
   
   .game-info .info-content {
     font-size: var(--font-size-sm);
