@@ -1,46 +1,70 @@
-/* ===== Button Styles ===== */
+/* ===== Modern Button Styles ===== */
 .btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  transition: opacity var(--transition-fast);
 }
 
 .btn:hover {
+  opacity: 0.9;
+}
+
+.btn:active {
   opacity: 0.8;
-  transform: translateY(-1px);
 }
 
 .btn-primary {
-  background: #bb86fc;
-  color: #000;
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark));
+  color: var(--text-primary);
+  border-color: var(--primary-purple-light);
 }
 
 .btn-secondary {
-  background: #6c757d;
-  color: #fff;
+  background: var(--bg-glass-light);
+  color: var(--text-secondary);
+  border-color: var(--border-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-accent);
 }
 
 .btn-success {
-  background: #4caf50;
-  color: #fff;
+  background: linear-gradient(135deg, var(--success-color), #059669);
+  color: var(--text-primary);
+  border-color: var(--success-color);
 }
 
 .btn-warning {
-  background: #ff9800;
-  color: #000;
+  background: linear-gradient(135deg, var(--warning-color), #d97706);
+  color: var(--bg-primary);
+  border-color: var(--warning-color);
+  font-weight: var(--font-weight-semibold);
 }
 
 .btn-info {
-  background: #2196f3;
-  color: #fff;
+  background: linear-gradient(135deg, var(--info-color), #0891b2);
+  color: var(--text-primary);
+  border-color: var(--info-color);
 }
 
 .btn-danger {
-  background: #f44336;
-  color: #fff;
+  background: linear-gradient(135deg, var(--error-color), #dc2626);
+  color: var(--text-primary);
+  border-color: var(--error-color);
 }
 
 /* Button size variants */
