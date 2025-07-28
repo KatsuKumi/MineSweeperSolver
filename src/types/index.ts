@@ -80,10 +80,10 @@ export const PRESET_SIZES = [
   { name: 'Beginner', rows: 9, cols: 9, mines: 10 },
   { name: 'Intermediate', rows: 16, cols: 16, mines: 40 },
   { name: 'Expert', rows: 30, cols: 16, mines: 99 },
-  { name: 'GTNH Small', rows: 13, cols: 13, mines: 20 },
-  { name: 'GTNH Medium', rows: 15, cols: 15, mines: 30 },
-  { name: 'GTNH Large', rows: 17, cols: 17, mines: 42 },
-  { name: 'GTNH Extra Large', rows: 19, cols: 19, mines: 68 },
+  { name: 'Tier 1', rows: 13, cols: 13, mines: 20 },
+  { name: 'Tier 2', rows: 15, cols: 15, mines: 30 },
+  { name: 'Tier 3', rows: 17, cols: 17, mines: 42 },
+  { name: 'Tier 4', rows: 19, cols: 19, mines: 68 },
 ] as const
 
 export type PresetName = (typeof PRESET_SIZES)[number]['name']
