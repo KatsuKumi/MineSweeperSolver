@@ -1,5 +1,10 @@
 <template>
-  <div :class="cellClasses" @click="$emit('click')">
+  <div
+    :class="cellClasses"
+    @pointerdown="$emit('pointerdown', $event)"
+    @pointerenter="$emit('pointerenter', $event)"
+    @contextmenu.prevent="$emit('contextmenu', $event)"
+  >
     {{ displayValue }}
   </div>
 </template>
@@ -15,19 +20,21 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const emit = defineEmits<{
-  click: []
+defineEmits<{
+  pointerdown: [event: PointerEvent]
+  pointerenter: [event: PointerEvent]
+  contextmenu: [event: MouseEvent]
 }>()
 
 const cellClasses = computed(() => [
   'cell',
+  props.cell.value && /^[1-8]$/.test(props.cell.value) ? `number-${props.cell.value}` : '',
   {
     unrevealed: props.cell.value === '',
     'empty-revealed': props.cell.value === '0',
     number: /^[1-8]$/.test(props.cell.value),
-    'number--green': props.cell.value === '2',
-    'number--red': props.cell.value === '3',
     mine: props.cell.value === 'M',
+    flag: props.cell.value === 'F',
     'safe-move': props.isHighlighted && props.highlightType === 'safe',
     'mine-move': props.isHighlighted && props.highlightType === 'mine',
   },
@@ -40,4 +47,3 @@ const displayValue = computed(() => {
   return props.cell.value
 })
 </script>
-

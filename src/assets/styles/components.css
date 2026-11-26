@@ -324,6 +324,19 @@
   border-radius: 4px;
 }
 
+.image-analysis .preview-canvas--interactive {
+  cursor: crosshair;
+  touch-action: none;
+  display: block;
+}
+
+.image-analysis .corner-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
 .image-analysis .image-info {
   margin-top: 10px;
   color: #ccc;
@@ -416,10 +429,87 @@
 /* ===== Grid Components ===== */
 .minesweeper-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-md);
   width: 100%;
   padding: var(--space-sm) 0;
+}
+
+.brush-toolbar {
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.brush-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.brush-active-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.brush-badge {
+  color: var(--text-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+.brush-slider-wrap {
+  padding: 2px 4px;
+}
+
+.brush-slider {
+  width: 100%;
+  accent-color: var(--primary-purple);
+  cursor: pointer;
+  height: 8px;
+}
+
+.brush-pills {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.brush-pill {
+  padding: 6px 2px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.brush-pill:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-elevated);
+}
+
+.brush-pill.active {
+  background: var(--primary-purple);
+  border-color: var(--primary-purple-light);
+  color: #ffffff;
+  box-shadow: 0 0 10px var(--primary-purple-glow);
 }
 
 .grid {
@@ -433,6 +523,8 @@
   height: fit-content;
   box-shadow: var(--shadow-xl);
   position: relative;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .grid::before {

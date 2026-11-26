@@ -54,20 +54,20 @@ export type ColorKey = keyof ColorSettings
 export type CellColorType = '1' | '2' | '3' | '4' | 'M' | 'unrevealed' | 'empty'
 
 export const DEFAULT_COLORS: ColorSettings = {
-  color1: '#c29af0',
+  color1: '#665fff',
   color2: '#15f41c',
-  color3: '#fc5342',
-  color4: '#3300ea',
-  colorMine: '#fd0a0c',
-  colorUnrevealed: '#163a61',
-  colorEmpty: '#0a1e31',
+  color3: '#eb3e41',
+  color4: '#0427f5',
+  colorMine: '#fa0505',
+  colorUnrevealed: '#07304e',
+  colorEmpty: '#031928',
 } as const
 
 export const DEFAULT_TOLERANCE: ColorTolerance = {
-  numbers: 50,
-  mines: 50,
-  unrevealed: 40,
-  empty: 40,
+  numbers: 85,
+  mines: 85,
+  unrevealed: 55,
+  empty: 55,
 } as const
 
 export const COLOR_DISPLAY_NAMES: Record<ColorKey, string> = {
