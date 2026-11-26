@@ -1,12 +1,18 @@
 import { useAnalysisStore, useColorStore, useGameStore } from '@/stores'
 import { useColorDetection } from './useColorDetection'
-import type { DetectedBoard, CellValue } from '@/types'
+import {
+  computeHomography,
+  detectBoardQuad,
+  projectPoint,
+  type BoardQuad,
+} from '@/utils/perspective'
+import type { DetectedBoard, RGBColor } from '@/types'
 
 export function useImageAnalysis() {
   const analysisStore = useAnalysisStore()
   const colorStore = useColorStore()
   const gameStore = useGameStore()
-  const { analyzeCell } = useColorDetection()
+  const { classifyCellPixels } = useColorDetection()
 
   function analyzeImageWithGrid(
     imageData: Uint8ClampedArray,
@@ -14,6 +20,7 @@ export function useImageAnalysis() {
     height: number,
     targetRows: number,
     targetCols: number,
+    quad?: BoardQuad,
   ): DetectedBoard {
     const result: DetectedBoard = {
       rows: targetRows,
@@ -25,21 +32,57 @@ export function useImageAnalysis() {
       colorDebug: [],
     }
 
-    const cellWidth = width / targetCols
-    const cellHeight = height / targetRows
+    const activeQuad =
+      quad ??
+      detectBoardQuad(
+        imageData,
+        width,
+        height,
+        colorStore.settings.colorUnrevealed,
+        colorStore.settings.colorEmpty,
+      )
+
+    const H = computeHomography(
+      [
+        { x: 0, y: 0 },
+        { x: 1, y: 0 },
+        { x: 1, y: 1 },
+        { x: 0, y: 1 },
+      ],
+      [activeQuad.topLeft, activeQuad.topRight, activeQuad.bottomRight, activeQuad.bottomLeft],
+    )
+
+    const approxCellW = Math.abs(activeQuad.topRight.x - activeQuad.topLeft.x) / targetCols
+    const approxCellH = Math.abs(activeQuad.bottomLeft.y - activeQuad.topLeft.y) / targetRows
+    const samplesPerAxis = Math.max(10, Math.min(18, Math.round(Math.min(approxCellW, approxCellH) * 0.45)))
+
+    const margin = 0.14
+    const span = 1 - margin * 2
 
     for (let row = 0; row < targetRows; row++) {
       result.cells[row] = []
       result.colorDebug[row] = []
 
       for (let col = 0; col < targetCols; col++) {
-        const cellLeft = Math.floor(col * cellWidth)
-        const cellTop = Math.floor(row * cellHeight)
-        const cellRight = Math.floor((col + 1) * cellWidth)
-        const cellBottom = Math.floor((row + 1) * cellHeight)
+        const pixels: RGBColor[] = []
 
-        const analysis = analyzeCell(imageData, width, cellLeft, cellTop, cellRight, cellBottom)
+        for (let sy = 0; sy < samplesPerAxis; sy++) {
+          const v = (row + margin + ((sy + 0.5) / samplesPerAxis) * span) / targetRows
+          for (let sx = 0; sx < samplesPerAxis; sx++) {
+            const u = (col + margin + ((sx + 0.5) / samplesPerAxis) * span) / targetCols
+            const pt = projectPoint(H, u, v)
+            const px = Math.max(0, Math.min(width - 1, Math.round(pt.x)))
+            const py = Math.max(0, Math.min(height - 1, Math.round(pt.y)))
+            const i = (py * width + px) * 4
+            pixels.push({
+              r: imageData[i],
+              g: imageData[i + 1],
+              b: imageData[i + 2],
+            })
+          }
+        }
 
+        const analysis = classifyCellPixels(pixels)
         result.cells[row][col] = analysis.cellType
         result.colorDebug[row][col] = analysis.debugInfo
 
